@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
+import {
+    getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword,
+    onAuthStateChanged, signOut, User } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -13,15 +15,23 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-export const registerUser = async (name: string, email: string, password: string) => {
+export const registerUser = async (name: string, email: string, password: string): Promise<User> => {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     if (auth.currentUser) {
         await updateProfile(auth.currentUser, { displayName: name });
     }
     return userCredential.user;
-}
+};
 
-export const loginUser = async (email: string, password: string) => {
+export const loginUser = async (email: string, password: string): Promise<User> => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     return userCredential.user;
-}
+};
+
+export const logoutUser = async (): Promise<void> => {
+    await signOut(auth);
+};
+
+export const subscribeToAuth = (callback: (user: User | null) => void) => {
+    return onAuthStateChanged(auth, callback);
+};
