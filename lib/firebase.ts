@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -18,5 +18,10 @@ export const registerUser = async (name: string, email: string, password: string
     if (auth.currentUser) {
         await updateProfile(auth.currentUser, { displayName: name });
     }
+    return userCredential.user;
+}
+
+export const loginUser = async (email: string, password: string) => {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
     return userCredential.user;
 }

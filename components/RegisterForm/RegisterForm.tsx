@@ -30,6 +30,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="">
+            <h2 className="">Registration</h2>
+            <p>Thank you for your interest in our platform! In order to register, we need some information.
+                Please provide us with the following information</p>
             <div>
                 <input
                     {...register("name")}
@@ -61,7 +64,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
                 disabled={isSubmitting}
                 className=""
             >
-                Register
+                Sign Up
             </button>
         </form>
     );
