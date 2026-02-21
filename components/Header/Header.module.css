@@ -1,0 +1,115 @@
+.header {
+    padding: 20px 128px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1184px;
+    margin: 0 auto;
+}
+
+/*links*/
+
+.navigation {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navLink {
+    text-decoration: none;
+    color: #121417;
+    font-weight: 400;
+    font-size: 16px;
+    transition: color 0.2 ease;
+}
+
+.navLink:hover {
+    color: #000;
+    opacity: 0.8;
+}
+
+.navLink:active,
+.navLink.active {
+    color: #F4C550;
+}
+
+/*buttons*/
+
+.authBlock {
+    display: flex;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.loginBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    color: #121417;
+    padding: 0;
+}
+
+.loginIcon {
+    stroke: #F4C550;
+    fill: none;
+    transition: stroke 0.3s ease;
+}
+
+.loginBtn:hover .loginIcon {
+    stroke: #ffbd1a;
+}
+
+.registerBtn {
+    background-color: #121417;
+    color: #fff;
+    padding: 14px 39px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.registerBtn:hover {
+    background-color: #F4C550;
+}
+
+.userMenu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    color: #121417;
+    padding: 7px 19px;
+    border-radius: 8px;
+}
+
+.logoutBtn:hover {
+    color: #F4C550;
+    border-color: #F4C550;
+}
