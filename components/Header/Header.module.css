@@ -29,13 +29,13 @@
 }
 
 .navLink:hover {
-    color: #000;
+    color: var(--main-color);
     opacity: 0.8;
 }
 
 .navLink:active,
 .navLink.active {
-    color: #F4C550;
+    color: var(--main-color);
 }
 
 /*buttons*/
@@ -65,13 +65,13 @@
 }
 
 .loginIcon {
-    stroke: #F4C550;
+    stroke: var(--main-color);
     fill: none;
     transition: stroke 0.3s ease;
 }
 
 .loginBtn:hover .loginIcon {
-    stroke: #ffbd1a;
+    stroke: var(--bg-light);
 }
 
 .registerBtn {
@@ -86,8 +86,8 @@
     transition: background-color 0.2s;
 }
 
-.registerBtn:hover {
-    background-color: #F4C550;
+.registerBtn:hover, .registerBtn:focus {
+    background-color: var(--bg-light);
 }
 
 .userMenu {
@@ -110,6 +110,6 @@
 }
 
 .logoutBtn:hover {
-    color: #F4C550;
-    border-color: #F4C550;
+    color: var(--bg-light);
+    border-color: var(--bg-light);
 }

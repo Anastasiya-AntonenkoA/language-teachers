@@ -39,7 +39,7 @@
 }
 
 .input:focus {
-    border-color: #F4C550;
+    border-color: var(--bg-light);
 }
 
 .inputError {
@@ -76,7 +76,7 @@
 .submitBtn {
     margin-top: 22px;
     padding: 16px;
-    background-color: #F4C550;
+    background-color: var(--main-color);
     border: none;
     border-radius: 12px;
     font-size: 18px;
@@ -87,5 +87,5 @@
 }
 
 .submitBtn:hover {
-    background-color: #ffbd1a;
+    background-color: var(--bg-light);
 }
