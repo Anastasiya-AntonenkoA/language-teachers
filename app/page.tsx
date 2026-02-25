@@ -1,60 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useTheme } from "@/components/ThemeProvider/ThemeContext";
 import styles from "./page.module.css";
-import Header from "@/components/Header/Header";
 import Image from "next/image";
 
-type Theme = {
-  class: string;
-  color: string;
-  bgLight: string;
-  image: string;
-};
-
-const themes: Theme[] = [
-  { class: "", color: "#F4C550", bgLight: "#FBE9BA", image: "/images/yellow.png" },
-  { class: styles.themeGreen, color: "#9FBAAE", bgLight: "#CBDED3", image: "/images/green.png" },
-  { class: styles.themeBlue, color: "#9FB7CE", bgLight: "#BFD6EA", image: "/images/blue.png" },
-  { class: styles.themeRed, color: "#E0A39A", bgLight: "#F2C0BD", image: "/images/red.png" },
-  { class: styles.themeOrange, color: "#F0AA8D", bgLight: "#F4C8BA", image: "/images/orange.png" },
-];
-
 export default function Home() {
-  const [currentThemeIdx, setCurrentThemeIdx] = useState(0);
-  const [isOpened, setIsOpened] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("selectedThemeIdx");
-    if (saved !== null) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setCurrentThemeIdx(parseInt(saved, 10));
-    }
-  }, []);
-
-  useEffect(() => {
-    const theme = themes[currentThemeIdx];
-    if (!theme) return;
-
-    document.documentElement.style.setProperty('--main-color', theme.color);
-    document.documentElement.style.setProperty('--bg-light', theme.bgLight);
-
-    localStorage.setItem("selectedThemeIdx", currentThemeIdx.toString());
-  }, [currentThemeIdx]);
-
-  const currentTheme = themes[currentThemeIdx];
+  const { currentTheme } = useTheme();
 
   return (
-    <div className={`${styles.page} ${currentTheme.class}`}>
-      <div 
-        className={styles.page} 
-        style={{ 
-          '--main-color': currentTheme.color,
-          '--bg-light': currentTheme.bgLight
-        } as React.CSSProperties}
-      >
-      <Header />
-
+    <div className={styles.page}>
       <main className={styles.mainContent}>        
         <section className={styles.heroContainer}>
           <div className={styles.leftCard}>
@@ -68,7 +22,6 @@ export default function Home() {
             <button className={styles.btn}>Get started</button>
           </div>
 
-          {/* Права частина з картинкою */}
           <div className={styles.rightCard}>
             <Image
               src={currentTheme.image} 
@@ -87,31 +40,7 @@ export default function Home() {
           <div><strong>120 +</strong> Subjects taught</div>
           <div><strong>200 +</strong> Tutor nationalities</div>
         </div>
-
-        <div className={styles.themeMenuContainer}>
-          <div className={`${styles.optionsList} ${isOpened ? styles.visible : ""}`}>
-            {themes.map((theme, index) => (
-              <button
-                key={index}
-                className={styles.themeOption}
-                style={{ backgroundColor: theme.color }}
-                onClick={() => {
-                  setCurrentThemeIdx(index);
-                  setIsOpened(false);
-                }}
-                title={`Обрати тему ${index + 1}`}
-              />
-            ))}
-          </div>
-
-          <button 
-            className={styles.themeToggle} 
-            onClick={() => setIsOpened(!isOpened)}
-            style={{ backgroundColor: currentTheme.color }}
-          ></button>
-        </div>
       </main>
-      </div>
     </div>
   );
 }

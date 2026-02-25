@@ -2,18 +2,93 @@
     display: flex;
     gap: 20px;
     margin-bottom: 32px;
-    flex-wrap: wrap;
 }
 
 .filterGroup {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    /* Відступ між лейблом та селектом */
 }
 
-.select {
-    padding: 10px;
-    border-radius: 12px;
-    border: 1px solid #ccc;
-    min-width: 150px;
+.label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28;
+    color: #8a8a89;
+    margin: 0;
+}
+
+.customSelectWrapper {
+    position: relative;
+}
+
+.selectHeader {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: 18px;
+    color: #121417;
+    min-height: 48px;
+}
+
+.currentValue {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.arrow {
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.arrowRotated {
+    transform: rotate(180deg);
+}
+
+.optionsList {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid rgba(18, 20, 23, 0.05);
+    box-shadow: 0px 20px 69px rgba(0, 0, 0, 0.03);
+    border-radius: 14px;
+    padding: 14px 18px;
+    list-style: none;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    margin: 0;
+}
+
+.option {
+    padding: 4px 0;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 18px;
+    color: rgba(18, 20, 23, 0.2);
+    transition: color 0.2s;
+}
+
+.option:hover,
+.selectedOption {
+    color: #121417;
+}
+
+.optionsList::-webkit-scrollbar {
+    width: 6px;
+}
+
+.optionsList::-webkit-scrollbar-thumb {
+    background: rgba(18, 20, 23, 0.1);
+    border-radius: 10px;
 }

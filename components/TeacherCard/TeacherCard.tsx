@@ -1,112 +1,92 @@
-// "use client";
-// import { useState, useEffect } from "react";
-// import Image from "next/image";
-// import { Teacher } from "@/lib/api";
-// import Link from "next/link";
+"use client";
 
-// import { useFavoritesStore } from "@/lib/stores/favoritesSlice";
+import { Teacher } from "@/lib/api";
+import { useAuthStore } from "@/lib/stores/useAuthStore";
+import Image from "next/image";
+import css from "./TeacherCard.module.css";
 
-// interface CamperCardProps {
-//   item: Camper;
-// }
+interface Props {
+  teacher: Teacher;
+}
 
-// const CamperCard = ({ item }: CamperCardProps) => {
-//   const items = useFavoritesStore((state) => state.items);
-//   const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
+const TeacherCard = ({ teacher }: Props) => {
+  const { isLoggedIn, favorites, toggleFavorite } = useAuthStore(); 
+  const isFavorite = favorites.includes(teacher.id || "");
 
-//   const [mounted, setMounted] = useState(false);
+  const handleHeartClick = () => {
+    if (!isLoggedIn) {
+      alert("This functionality is available only for authorized users!");
+      // Тут можна замість alert відкрити модалку: setIsModalOpen(true)
+      return;
+    }
+    toggleFavorite(teacher.id!);
+  };
 
-//   useEffect(() => {
-//     const frame = requestAnimationFrame(() => {
-//       setMounted(true);
-//     });
-//     return () => cancelAnimationFrame(frame);
-//   }, []);
+    return (
+        <div className={css.card}>
+            <div className={css.avatarWrapper}>
+                <div className={css.avatarCircle}>
+                    <Image
+                        src={teacher.avatar_url}
+                        alt={`${teacher.name} ${teacher.surname}`}
+                        width={96}
+                        height={96}
+                        className={css.avatar}
+                    />
+                <div className={css.onlineIndicator}></div>
+            </div>
+        </div>
 
-//   const isFavorite = items.includes(item.id);
-//   const activeFavorite = mounted && isFavorite;
+        <div className={css.infoWrapper}>
+            <div className={css.header}>
+            <div>
+                <p className={css.subTitle}>Languages</p>
+                <h2 className={css.name}>{teacher.name} {teacher.surname}</h2>
+            </div>
 
-//   const handleFavoriteClick = () => {
-//     toggleFavorite(item.id);
-//   };
+            <div className={css.stats}>
+                <span>
+                    <svg className={css.icon} width="16" height="16">
+                        <use href="/icons/sprite.svg#icon-book-open" />
+                    </svg>
+                    Lessons online
+                </span>
+                <span>Lessons done: {teacher.lessons_done}</span>
+                <span>
+                    <svg className={css.icon} width="16" height="16">
+                        <use href="/icons/sprite.svg#icon-star-full" />
+                    </svg>
+                    Rating: {teacher.rating}
+                </span>
+                <span>Price / 1 hour: <span className={css.price}>{teacher.price_per_hour}$</span></span>
+                
+                <button 
+                    className={`${css.heartBtn} ${isFavorite ? css.active : ""}`} 
+                    onClick={handleHeartClick}
+                        >
+                <svg className={css.icon} width="26" height="26">
+                        <use href="/icons/sprite.svg#icon-heart" />
+                </svg>
+                </button>
+            </div>
+            </div>
 
-//   const tags = [
-//     {key: "transmission", label: item.transmission.charAt(0).toUpperCase() + item.transmission.slice(1), icon: "icon-automatic"},
-//     { key: "engine", label: item.engine.charAt(0).toUpperCase() + item.engine.slice(1), icon: "icon-petrol" },
-//     ...equipmentFilters
-//     .filter(filter => filter.id !== "transmission")
-//     .filter(filter => item[filter.id as keyof Camper] === true)
-//     .map(filter => ({
-//       key: filter.id,
-//       label: filter.label,
-//       icon: `icon-${filter.id.toLowerCase()}`
-//     }))
-//   ];
+            <div className={css.details}>
+            <p><span>Speaks:</span> <span className={css.languages}>{teacher.languages.join(", ")}</span></p>
+            <p><span>Lesson Info:</span> {teacher.lesson_info}</p>
+            <p><span>Conditions:</span> {teacher.conditions.join(". ")}</p>
+            </div>
 
-//   return (
-//     <li className={css.card}>
-//       <div className={css.imageWrapper}>
-//         <Image
-//           src={item.gallery[0]?.thumb ?? "/images/default-camper.jpg"}
-//           alt={item.name}
-//           fill
-//           className={css.image}
-//         />
-//       </div>
+            <button className={css.readMore}>Read more</button>
 
-//       <div className={css.content}>
-//         <div className={css.header}>
-//           <h2 className={css.name}>{item.name}</h2>
-//           <div className={css.priceWrapper}>
-//             <span className={css.price}>€{item.price.toFixed(2)}</span>
-//             <button
-//               aria-label={activeFavorite ? "Remove from favorites" : "Add to favorites"}
-//               type="button"
-//               className={`${css.favoriteBtn} ${activeFavorite ? css.active : ""}`}
-//               onClick={handleFavoriteClick}
-//             >
-//               <svg width="26" height="24" className={css.heartIcon}>
-//                 <use href="/icons/sprite.svg#icon-heart" />
-//               </svg>
-//             </button>
-//           </div>
-//         </div>
-//         <div className={css.subHeader}>
-//           <div className={css.ratingWrapper}>
-//             <svg width="16" height="16" className={css.starIcon}>
-//               <use href="/icons/sprite.svg#icon-star" />
-//             </svg>
-//             <span className={css.ratingText}>
-//               {item.rating} ({item.reviews.length} Reviews)
-//             </span>
-//           </div>
-//           <div className={css.locationWrapper}>
-//             <svg width="16" height="16" className={css.mapIcon}>
-//               <use href="/icons/sprite.svg#icon-map" />
-//             </svg>
-//             <span>{item.location}</span>
-//           </div>
-//         </div>
+            <div className={css.levels}>
+            {teacher.levels.map((level) => (
+                <span key={level} className={css.levelBadge}>#{level}</span>
+            ))}
+            </div>
+        </div>
+        </div>
+    );
+};
 
-//         <p className={css.description}>{item.description}</p>
-
-//         <ul className={css.tagsList}>
-//           {tags.map((tag) => (
-//             <li key={tag.key} className={css.tag}>
-//               <svg width="20" height="20">
-//                 <use href={`/icons/sprite.svg#${tag.icon}`} />
-//               </svg>
-//               <span>{tag.label}</span>
-//             </li>
-//           ))}
-//         </ul>
-
-//         <Link href={`/catalog/${item.id}`} className={css.showMoreBtn}>
-//           Show more
-//         </Link>
-//       </div>
-//     </li>
-//   );
-// };
-
-// export default CamperCard;
+export default TeacherCard;

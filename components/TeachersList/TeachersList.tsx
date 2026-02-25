@@ -1,7 +1,7 @@
 "use client";
 
 import { Teacher, getTeachers, FilterParams, Level } from "@/lib/api";
-// import CamperCard from "../CamperCard/CamperCard";
+import TeacherCard from "../TeacherCard/TeacherCard";
 import css from "./TeachersList.module.css";
 import Filters from "../Filters/Filters";
 import { useState, useEffect, useCallback } from "react";
@@ -65,6 +65,7 @@ const TeacherList = ({ initialData }: Props) => {
     };
 
     return (
+    <div className={css.sectionWrapper}>
         <div className={css.container}>
             <Filters />
             
@@ -74,7 +75,7 @@ const TeacherList = ({ initialData }: Props) => {
                         <ul className={css.list}>
                             {teachers.map((teacher, index) => (
                                 <li key={teacher.id || `${teacher.name}-${index}`}>
-                                    <p>{teacher.name} {teacher.surname}</p>
+                                    <TeacherCard teacher={teacher} />
                                 </li>
                             ))}
                         </ul>
@@ -106,7 +107,8 @@ const TeacherList = ({ initialData }: Props) => {
                     </div>
                 )}
             </main>
-        </div>
+            </div>
+    </div>
     );
 }
 

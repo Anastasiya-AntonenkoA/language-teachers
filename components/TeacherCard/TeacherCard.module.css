@@ -1,0 +1,65 @@
+.card {
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 24px;
+    display: flex;
+    gap: 48px;
+    position: relative;
+}
+
+.avatarCircle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #FBE9BA;
+    padding: 12px;
+    position: relative;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.onlineIndicator {
+    width: 12px;
+    height: 12px;
+    background: #38CD3E;
+    border: 2px solid #FFF;
+    border-radius: 50%;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.price {
+    color: #38CD3E;
+    font-weight: 700;
+}
+
+.heartBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.heartBtn:hover {
+    transform: scale(1.1);
+}
+
+.levelBadge {
+    padding: 8px 12px;
+    background: #F8F8F8;
+    border: 1px solid rgba(18, 20, 23, 0.1);
+    border-radius: 35px;
+    font-size: 14px;
+}
+
+/* Перший бейдж на скріншоті жовтий */
+.levelBadge:first-child {
+    background: #F4C550;
+    border-color: #F4C550;
+}
