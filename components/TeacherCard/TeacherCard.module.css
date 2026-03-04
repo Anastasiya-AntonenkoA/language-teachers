@@ -1,24 +1,26 @@
 .card {
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 24px;
     padding: 24px;
     display: flex;
     gap: 48px;
-    position: relative;
+    max-width: 1184px;
+    width: 100%;
 }
 
 .avatarCircle {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    border: 3px solid #FBE9BA;
+    border: 3px solid var(--main-color);
     padding: 12px;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .avatar {
-    width: 100%;
-    height: 100%;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -26,40 +28,321 @@
 .onlineIndicator {
     width: 12px;
     height: 12px;
-    background: #38CD3E;
-    border: 2px solid #FFF;
+    background: #38cd3e;
+    border: 2px solid #fff;
     border-radius: 50%;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 18px;
+    right: 18px;
 }
 
-.price {
-    color: #38CD3E;
-    font-weight: 700;
+.infoWrapper {
+    flex-grow: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+}
+
+.subTitle {
+    font-weight: 500;
+    color: #8a8a89;
+    margin-bottom: 8px;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.stats {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-weight: 500;
+}
+
+.statItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+.statItem:not(:last-of-type)::after {
+    content: "";
+    width: 1px;
+    height: 16px;
+    background: rgba(18, 20, 23, 0.2);
+    margin-left: 16px;
+}
+
+.priceValue {
+    color: #38cd3e;
+}
+
+.iconStar {
+    fill: #ffc531;
+}
+
+.iconBook {
+    fill: none;
+    stroke: currentColor;
 }
 
 .heartBtn {
     background: none;
     border: none;
+    padding: 0;
+    margin-left: 24px;
     cursor: pointer;
-    transition: transform 0.2s;
+}
+
+.iconHeart {
+    fill: none;
+    stroke: #121417;
+    transition: all 0.2s;
+}
+
+.active .iconHeart {
+    fill: var(--main-color);
+    stroke: var(--main-color);
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.label {
+    color: #8a8a89;
+    font-weight: 500;
+}
+
+.languagesText {
+    text-decoration: underline;
+}
+
+.readMore {
+    background: none;
+    border: none;
+    padding: 0;
+    font-weight: 500;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-bottom: 32px;
+}
+
+.expandedContent {
+    margin-top: 16px;
+    margin-bottom: 32px;
+}
+
+.experienceText {
+    line-height: 1.5;
+    margin-bottom: 32px;
+}
+
+.reviewsList {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.reviewerHeader {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.reviewerAvatarPlaceholder {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fbe9ba;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.reviewerName {
+    color: #8a8a89;
+    font-weight: 500;
+}
+
+.reviewerRating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.levels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 32px;
+}
+
+.levelBadge {
+    padding: 8px 12px;
+    border-radius: 35px;
+    border: 1px solid rgba(18, 20, 23, 0.1);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.levelBadge:first-child {
+    background: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.bookBtn {
+    margin-top: 32px;
+    padding: 16px 48px;
+    background: var(--main-color);
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.bookBtn:hover {
+    background: var(--bg-light);
+}
+
+.modalAuthWrapper {
+    padding: 20px;
+    max-width: 400px;
+}
+
+.modalTitle {
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.modalText {
+    color: rgba(18, 20, 23, 0.8);
+    margin-bottom: 40px;
+    line-height: 1.37;
+}
+
+.switchAuthMode {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.linkBtn {
+    background: none;
+    border: none;
+    color: var(--main-color);
+    text-decoration: underline;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.modalAuthWrapper {
+    padding: 20px;
+    max-width: 566px;
+}
+
+.promptContainer {
+    text-align: left;
+}
+
+.promptButtons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.loginBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.registerBtn {
+    background-color: #121417;
+    color: #fff;
+    padding: 14px 39px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.registerBtn:hover {
+    background-color: var(--bg-light);
+}
+
+.switchText {
+    margin-top: 20px;
+    text-align: center;
+    color: rgba(18, 20, 23, 0.5);
+}
+
+.switchText span {
+    color: #121417;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.loginIcon {
+    stroke: var(--main-color);
+    fill: none;
+    transition: stroke 0.3s ease;
+}
+
+.loginBtn:hover .loginIcon {
+    stroke: var(--bg-light);
+}
+
+.heartBtn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .heartBtn:hover {
     transform: scale(1.1);
 }
 
-.levelBadge {
-    padding: 8px 12px;
-    background: #F8F8F8;
-    border: 1px solid rgba(18, 20, 23, 0.1);
-    border-radius: 35px;
-    font-size: 14px;
+.iconHeart {
+    fill: transparent;
+    stroke: #121417;
+    transition: all 0.3s ease;
 }
 
-/* Перший бейдж на скріншоті жовтий */
-.levelBadge:first-child {
-    background: #F4C550;
-    border-color: #F4C550;
+.heartBtn.active .iconHeart {
+    fill: var(--main-color) !important;
+    stroke: var(--main-color) !important;
 }

@@ -9,7 +9,7 @@ export interface Review {
 export type Level = 'A1 Beginner' | 'A2 Elementary' | 'B1 Intermediate' | 'B2 Upper-Intermediate' | 'C1 Advanced' | 'C2 Proficient';
 
 export interface Teacher {
-  id?: string;
+  id: string;
   name: string;
   surname: string;
   languages: string[];
@@ -38,30 +38,33 @@ export type TeachersResponse = {
 
 axios.defaults.baseURL = "https://language-teachers-default-rtdb.europe-west1.firebasedatabase.app/";
 
-const res = await axios.get("/teachers.json");
-console.log("Firebase raw data:", res.data);
-
 export const getTeachers = async (
     page: number = 1, 
     limit: number = 4, 
     filters: FilterParams = {} 
 ): Promise<TeachersResponse> => {  
     try {
-        const res = await axios.get<Teacher[] | Record<string, Teacher>>("/.json");
+        const res = await axios.get("/.json");
+        const rawData = res.data;
 
-        let allTeachers: Teacher[] = Array.isArray(res.data) 
-            ? res.data 
-            : Object.entries(res.data || {}).map(([id, data]) => ({ ...data, id }));
+        if (!rawData) return { items: [], total: 0 };
+
+        let allTeachers: Teacher[] = Object.entries(rawData)
+            .filter(([key]) => key !== 'favorites' && !isNaN(Number(key)))
+            .map(([id, data]) => ({ 
+                ...(data as Teacher), 
+                id: String(id)
+            }));
         
-        if (filters.language) {
-            allTeachers = allTeachers.filter(t => t.languages.includes(filters.language!));
-        }
-        if (filters.level) {
-            allTeachers = allTeachers.filter(t => t.levels.includes(filters.level!));
-        }
-        if (filters.price_per_hour) {
-            allTeachers = allTeachers.filter(t => t.price_per_hour <= filters.price_per_hour!);
-        }
+            if (filters.language) {
+                allTeachers = allTeachers.filter(t => t.languages.includes(filters.language!));
+            }
+            if (filters.level) {
+                allTeachers = allTeachers.filter(t => t.levels.includes(filters.level!));
+            }
+            if (filters.price_per_hour) {
+                allTeachers = allTeachers.filter(t => t.price_per_hour <= filters.price_per_hour!);
+            }
 
         const total = allTeachers.length;
         const startIndex = (page - 1) * limit;

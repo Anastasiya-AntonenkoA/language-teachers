@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "@/lib/validation";
 import { loginUser } from "@/lib/firebase";
+import { useAuthStore } from "@/lib/stores/useAuthStore";
 
 import { useState } from "react";
 import css from "./LoginForm.module.css";
@@ -16,6 +17,7 @@ interface LoginFormProps {
 };
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
+    const setLoggedIn = useAuthStore((state) => state.setLoggedIn);
     const [showPassword, setShowPassword] = useState(false);
     const { register, handleSubmit, formState: { errors, isSubmitting } } =
         useForm<LoginData>({
@@ -24,7 +26,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
     
     const onSubmit = async (data: LoginData) => {
         try {
-            await loginUser(data.email, data.password);
+            const user = await loginUser(data.email, data.password);
+            setLoggedIn(true, user.uid); 
             onSuccess();
         } catch (error) {
             const message = error instanceof Error ? error.message : "Unexpected error"
