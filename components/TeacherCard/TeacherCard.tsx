@@ -8,10 +8,12 @@ import { useEffect, useState } from "react";
 import { Modal } from "../Modal/Modal";
 import { LoginForm } from "../LoginForm/LoginForm";
 import { RegisterForm } from "../RegisterForm/RegisterForm";
+import { BookForm } from "../BookForm/BookForm";
 
 
 interface Props {
     teacher: Teacher;
+    selectedLevel?: string;
 }
 
 type AuthView = 'prompt' | 'login' | 'register';
@@ -25,6 +27,7 @@ const TeacherCard = ({ teacher }: Props) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const [authMode, setAuthMode] = useState<AuthView>('prompt');
+    const [isBookModalOpen, setIsBookModalOpen] = useState(false);
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -74,6 +77,13 @@ const TeacherCard = ({ teacher }: Props) => {
 
                     <div className={css.stats}>
                         <div className={css.statItem}>
+                            <svg className={css.iconHeart} width="16" height="16">
+                                <use href="/icons/sprite.svg#icon-book-open" />
+                            </svg>Lessons online |
+                            Lessons done: {teacher.lessons_done} |
+                            <svg fill='#FFC531' width="16" height="16">
+                                <use href="/icons/sprite.svg#icon-star-full" />
+                            </svg> Rating: {teacher.rating} | 
                             Price / 1 hour: <span className={css.priceValue}>{teacher.price_per_hour}$</span>
                         </div>
 
@@ -109,7 +119,10 @@ const TeacherCard = ({ teacher }: Props) => {
                                         <div className={css.reviewerAvatarPlaceholder}>{review.reviewer_name[0]}</div>
                                         <div>
                                             <p className={css.reviewerName}>{review.reviewer_name}</p>
-                                            <div className={css.reviewerRating}>★ {review.reviewer_rating.toFixed(1)}</div>
+                                            <div className={css.reviewerRating}>
+                                                <svg fill='#FFC531' width="16" height="16">
+                                                    <use href="/icons/sprite.svg#icon-star-full" />
+                                                </svg>{review.reviewer_rating.toFixed(1)}</div>
                                         </div>
                                     </div>
                                     <p className={css.reviewComment}>{review.comment}</p>
@@ -125,7 +138,14 @@ const TeacherCard = ({ teacher }: Props) => {
                     ))}
                 </div>
 
-                {isExpanded && <button className={css.bookBtn}>Book trial lesson</button>}
+                {isExpanded && (
+                    <button 
+                        className={css.bookBtn} 
+                        onClick={() => setIsBookModalOpen(true)}
+                    >
+                        Book trial lesson
+                    </button>
+                )}
             </div>
 
             <Modal
@@ -140,9 +160,10 @@ const TeacherCard = ({ teacher }: Props) => {
                             <h2 className={css.modalTitle}>Authentication Required</h2>
                             <p className={css.modalText}>Please log in or register to add teachers to your favorites and book lessons.</p>
                             <div className={css.promptButtons}>
-                                <button onClick={() => setAuthMode('login')} className={css.loginBtn}><svg className={css.loginIcon} width="20" height="20">
-                                    <use href="/icons/sprite.svg#icon-log-in" />
-                                </svg>Log in</button>
+                                <button onClick={() => setAuthMode('login')} className={css.loginBtn}>
+                                    <svg className={css.loginIcon} width="20" height="20">
+                                        <use href="/icons/sprite.svg#icon-log-in" />
+                                    </svg>Log in</button>
                                 <button onClick={() => setAuthMode('register')} className={css.registerBtn}>Registration</button>
                             </div>
                         </div>
@@ -150,6 +171,12 @@ const TeacherCard = ({ teacher }: Props) => {
                     {authMode === 'login' && <LoginForm onSuccess={() => setIsAuthModalOpen(false)} />}
                     {authMode === 'register' && <RegisterForm onSuccess={() => setIsAuthModalOpen(false)} />}
                 </div>
+            </Modal>
+            <Modal 
+                isOpen={isBookModalOpen} 
+                onClose={() => setIsBookModalOpen(false)}
+            >
+                <BookForm teacher={teacher} />
             </Modal>
         </div>
     );

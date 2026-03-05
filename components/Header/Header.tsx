@@ -6,6 +6,7 @@ import { RegisterForm } from "../RegisterForm/RegisterForm";
 import { LoginForm } from "../LoginForm/LoginForm";
 import { logoutUser, subscribeToAuth } from "@/lib/firebase";
 import { User } from "firebase/auth";
+import { useAuthStore } from "@/lib/stores/useAuthStore";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -18,6 +19,8 @@ export default function Header() {
     const [mode, setMode] = useState<Mode>("register");
     const [user, setUser] = useState<User | null>(null);
 
+    const logout = useAuthStore((state) => state.logout);
+
     useEffect(() => {
         const unsubscribe = subscribeToAuth((currentUser) => {
             setUser(currentUser);
@@ -29,6 +32,11 @@ export default function Header() {
     const openModal = (selectedMode: Mode) => {
         setMode(selectedMode);
         setIsOpen(true);
+    }
+
+    const handleLogout = async () => {
+        await logoutUser();
+        logout();
     }
 
     return (
@@ -47,6 +55,13 @@ export default function Header() {
                     <ul className={css.navigation}>
                         <li><Link href="/" className={css.navLink}>Home</Link></li>
                         <li><Link href="/teachers" className={css.navLink}>Teachers</Link></li>
+                        {user && (
+                            <li>
+                                <Link href="/favorites" className={css.navLink}>
+                                    Favorites
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </nav>
 
@@ -65,7 +80,8 @@ export default function Header() {
                             </button>
                         </div>) : (
                         <div className={css.userMenu}>
-                            <button onClick={logoutUser} className={css.logoutBtn}>
+                            <span className={css.userName}>Hello, {user.displayName}!</span>
+                            <button onClick={handleLogout} className={css.logoutBtn}>
                                 Log Out
                             </button>
                         </div>)}
