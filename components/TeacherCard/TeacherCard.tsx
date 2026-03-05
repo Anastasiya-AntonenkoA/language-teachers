@@ -18,7 +18,7 @@ interface Props {
 
 type AuthView = 'prompt' | 'login' | 'register';
 
-const TeacherCard = ({ teacher }: Props) => {
+const TeacherCard = ({ teacher, selectedLevel }: Props) => {
     const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
     const favorites = useAuthStore((state) => state.favorites);
     const toggleFavorite = useAuthStore((state) => state.toggleFavorite);
@@ -133,9 +133,18 @@ const TeacherCard = ({ teacher }: Props) => {
                 )}
 
                 <div className={css.levels}>
-                    {teacher.levels.map((level) => (
-                        <span key={level} className={css.levelBadge}>#{level}</span>
-                    ))}
+                    {teacher.levels.map((level) => {
+                        const isSelected = String(level) === String(selectedLevel);
+
+                        return (
+                            <span 
+                                key={level} 
+                                className={`${css.levelBadge} ${isSelected ? css.selectedLevel : ""}`}
+                            >
+                                #{level}
+                            </span>
+                        );
+                    })}
                 </div>
 
                 {isExpanded && (

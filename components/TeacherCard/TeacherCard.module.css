@@ -200,11 +200,13 @@
     border: 1px solid rgba(18, 20, 23, 0.1);
     font-size: 14px;
     font-weight: 500;
+    background-color: transparent;
+    transition: all 0.3s;
 }
 
-.levelBadge:first-child {
-    background: var(--main-color);
-    border-color: var(--main-color);
+.selectedLevel {
+    background-color: var(--main-color) !important;
+    border-color: var(--main-color) !important;
 }
 
 .bookBtn {

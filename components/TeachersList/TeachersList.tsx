@@ -14,6 +14,7 @@ type Props = {
 
 const TeacherList = ({ initialData }: Props) => {
     const searchParams = useSearchParams();
+    const currentLevel = searchParams.get("level") || "";
 
     const [teachers, setTeachers] = useState<Teacher[]>(initialData.items);
     const [page, setPage] = useState(1);
@@ -75,7 +76,10 @@ const TeacherList = ({ initialData }: Props) => {
                         <ul className={css.list}>
                             {teachers.map((teacher, index) => (
                                 <li key={teacher.id || `${teacher.name}-${index}`}>
-                                    <TeacherCard teacher={teacher} />
+                                    <TeacherCard 
+                                        teacher={teacher} 
+                                        selectedLevel={currentLevel} 
+                                    />
                                 </li>
                             ))}
                         </ul>
