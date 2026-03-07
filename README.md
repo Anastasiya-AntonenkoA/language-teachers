@@ -6,24 +6,27 @@ Features:
 2. Advanced Filtering: filter teachers by language, student level, and hourly rate to find the perfect match.
 3. Dynamic Loading: optimized performance with "Load More" pagination fetching data from Firebase.
 4. Authentication: secure Sign-Up and Sign-In functionality using Firebase Auth.
-5. Favorites System: authenticated users can save tutors to a "Favorites" list (persisted via Firebase/LocalStorage).
+5. Favorites System: authenticated users can save tutors to a "Favorites" list (persisted via Firebase).
 6. Trial Lesson Booking: integrated modal forms for booking trial lessons with built-in validation.
 7. Protected Routes: exclusive access to the Favorites page for logged-in users.
 8. Dynamic Theming: personalize the interface with 5 distinct color themes. The application uses Zustand for state management and CSS Variables for instant UI updates, persisting the user's choice across sessions via localStorage.
 
 Tech Stack:
+
 Frontend & Logic
-Framework: Next.js (React) — for SSR/Static generation and routing.
-Language: TypeScript — for type safety.
-State Management: Zustand — lightweight and fast state management for themes and user data.
-Styling: CSS Modules — for scoped and maintainable styles.
-Form Handling: React Hook Form with Yup — for robust form validation (Login, Registration, Booking).
+
+- Framework: Next.js (React) — for SSR/Static generation and routing.
+- Language: TypeScript — for type safety.
+- State Management: Zustand — lightweight and fast state management for themes and user data.
+- Styling: CSS Modules — for scoped and maintainable styles.
+- Form Handling: React Hook Form with Yup — for robust form validation (Login, Registration, Booking).
 
 Backend & Infrastructure
-Runtime Environment: Node.js — the foundation for the development environment and Next.js server.
-Backend-as-a-Service: Firebase
-Authentication: Secure email/password login and registration.
-Realtime Database: Efficient NoSQL storage for tutor profiles and user interactions.
+
+- Runtime Environment: Node.js — the foundation for the development environment and Next.js server.
+- Backend-as-a-Service: Firebase
+- Authentication: Secure email/password login and registration.
+- Realtime Database: Efficient NoSQL storage for tutor profiles and user interactions.
 
 Technical Implemented:
 
@@ -36,7 +39,7 @@ Technical Implemented:
 
 Preview:
 Home page:
-![Home page](public\images\assets\home.png)
+![Home page](image-1.png)
 
 Different themes:
 
