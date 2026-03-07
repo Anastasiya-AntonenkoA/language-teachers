@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Language Tutors Marketplace - a modern web application for finding and booking language tutors. Users can browse a list of professional teachers, filter them by various criteria, and manage their favorite tutors in a personalized dashboard.
 
-## Getting Started
+Features:
 
-First, run the development server:
+1. Interactive Teacher Catalog: browse a comprehensive list of language tutors with detailed profiles.
+2. Advanced Filtering: filter teachers by language, student level, and hourly rate to find the perfect match.
+3. Dynamic Loading: optimized performance with "Load More" pagination fetching data from Firebase.
+4. Authentication: secure Sign-Up and Sign-In functionality using Firebase Auth.
+5. Favorites System: authenticated users can save tutors to a "Favorites" list (persisted via Firebase/LocalStorage).
+6. Trial Lesson Booking: integrated modal forms for booking trial lessons with built-in validation.
+7. Protected Routes: exclusive access to the Favorites page for logged-in users.
+8. Dynamic Theming: personalize the interface with 5 distinct color themes. The application uses Zustand for state management and CSS Variables for instant UI updates, persisting the user's choice across sessions via localStorage.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Tech Stack:
+Frontend & Logic
+Framework: Next.js (React) — for SSR/Static generation and routing.
+Language: TypeScript — for type safety.
+State Management: Zustand — lightweight and fast state management for themes and user data.
+Styling: CSS Modules — for scoped and maintainable styles.
+Form Handling: React Hook Form with Yup — for robust form validation (Login, Registration, Booking).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Backend & Infrastructure
+Runtime Environment: Node.js — the foundation for the development environment and Next.js server.
+Backend-as-a-Service: Firebase
+Authentication: Secure email/password login and registration.
+Realtime Database: Efficient NoSQL storage for tutor profiles and user interactions.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Technical Implemented:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1.  Firebase Integration: full auth cycle (Register, Login, Logout, Session persistence).
+2.  Realtime Database: structured storage for teacher profiles and user data.
+3.  Form Validation: strict validation for Auth and Booking forms using Yup.
+4.  Modal Logic: accessible modals closing via Backdrop, 'Esc' key, or close button.
+5.  Pagination: server-side data fetching with a "Load More" mechanism.
+6.  Favorite Logic: toggle heart buttons with visual feedback and data synchronization.
 
-## Learn More
+Preview:
+Home page:
+![Home page](./images/assets/home.png)
 
-To learn more about Next.js, take a look at the following resources:
+Different themes:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+|                   Green Theme                   |                  Red Theme                  |
+| :---------------------------------------------: | :-----------------------------------------: |
+| ![Green theme](./images/assets/green theme.png) | ![Red Theme](./images/assets/red theme.png) |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Autorithation:
 
-## Deploy on Vercel
+|                Log In                |                   Registration                    |
+| :----------------------------------: | :-----------------------------------------------: |
+| ![Log In](./images/assets/login.png) | ![Registration](./images/assets/registration.png) |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Teacher list:
+![Teacher page](./images/assets/teachers.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Favorites list (only for registrations users):
+![Favorites page](./images/assets/favorites.png)
+
+Installation & Setup:
+
+Clone the repository:
+
+        Bash
+        git clone git@github.com:Anastasiya-AntonenkoA/language-teachers.git
+
+        Bash
+            npm install
+        Set up Environment Variables:
+        Create a .env.local file in the root directory and add your Firebase configuration:
+            NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+            NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
+            NEXT_PUBLIC_FIREBASE_DATABASE_URL=your_database_url
+            NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+            ...
+
+        Run the development server:
+        Bash
+            npm run dev
