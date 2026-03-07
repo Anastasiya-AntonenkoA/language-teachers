@@ -7,6 +7,8 @@ import css from "@/components/TeachersList/TeachersList.module.css";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
+import { Suspense } from "react";
+
 const FavoritesPage = () => {
     const searchParams = useSearchParams();
     const favoritesIds = useAuthStore((state) => state.favorites);
@@ -73,4 +75,10 @@ const FavoritesPage = () => {
     );
 };
 
-export default FavoritesPage;
+export default function Favorites() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <FavoritesPage />
+        </Suspense>
+    );
+}
