@@ -40,9 +40,9 @@ Home page:
 
 Different themes:
 
-|                Green Theme                |               Red Theme               |
-| :---------------------------------------: | :-----------------------------------: |
-| ![Green theme](./images/assets/green.png) | ![Red Theme](./images/assets/red.png) |
+|                 Green Theme                  |                Red Theme                 |
+| :------------------------------------------: | :--------------------------------------: |
+| ![Green theme](./images/assets/green_th.png) | ![Red Theme](./images/assets/red_th.png) |
 
 Autorithation:
 
