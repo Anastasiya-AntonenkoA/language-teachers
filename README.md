@@ -36,25 +36,25 @@ Technical Implemented:
 
 Preview:
 Home page:
-![Home page](./images/assets/home.png)
+![Home page](public\images\assets\home.png)
 
 Different themes:
 
-|                 Green Theme                  |                Red Theme                 |
-| :------------------------------------------: | :--------------------------------------: |
-| ![Green theme](./images/assets/green_th.png) | ![Red Theme](./images/assets/red_th.png) |
+|                    Green Theme                    |                   Red Theme                   |
+| :-----------------------------------------------: | :-------------------------------------------: |
+| ![Green theme](public\images\assets\green_th.png) | ![Red Theme](public\images\assets\red_th.png) |
 
 Autorithation:
 
-|                Log In                |                   Registration                    |
-| :----------------------------------: | :-----------------------------------------------: |
-| ![Log In](./images/assets/login.png) | ![Registration](./images/assets/registration.png) |
+|                  Log In                   |                      Registration                      |
+| :---------------------------------------: | :----------------------------------------------------: |
+| ![Log In](public\images\assets\login.png) | ![Registration](public\images\assets\registration.png) |
 
 Teacher list:
-![Teacher page](./images/assets/teachers.png)
+![Teacher page](public\images\assets\teachers.png)
 
 Favorites list (only for registrations users):
-![Favorites page](./images/assets/favorites.png)
+![Favorites page](public\images\assets\favorites.png)
 
 Installation & Setup:
 
